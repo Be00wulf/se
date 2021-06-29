@@ -82,7 +82,7 @@ public class Juego {
             casilla1[variable_aleatoria].setTipoCasilla("Tira de Nuevo");
         }
         
-        for (int i =1;i<=6;i++)//5
+        for (int i =1;i<=5;i++)
         {
             int variable_aleatoria=aleatorio.nextInt((int)numeroCasillas)+1;
             while(true)//ciclo para validar la posicion de las casillas
