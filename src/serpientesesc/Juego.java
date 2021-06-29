@@ -46,7 +46,7 @@ public class Juego {
              jugador[2].setColorFicha(Color.BLACK);          
         }   
         
-        Casilla [] casilla1;
+        Casilla [] casilla1;                                //casillas
         casilla1 = new Casilla[(int)numeroCasillas+1];
       
         for (int cont = 1; cont<=(int)numeroCasillas;cont++){
@@ -65,8 +65,9 @@ public class Juego {
                 break;
             }
             casilla1[variable_aleatoria].setTipoCasilla("Pierde Turno");
-       }
+        }
         
+        //solo cantidad de casillas
         if (presentacion.getNivelDificultad().equals("Nivel avanzado")){
         for (int a=1;a<=5;a++){
             int variable_aleatoria = aleatorio.nextInt((int)numeroCasillas)+1;
@@ -96,113 +97,99 @@ public class Juego {
                 casilla1[variable_aleatoria].setTipoCasilla("Cambia Tablero");     
             }
         }
-        
-        //se hacen cinco casillas aleatorias de escalera
+
+        //escalera
         int variable_avanza;
         for (int k = 1;k<=5;k++){
-            int variable_aleatoria2 = aleatorio.nextInt((int)(numeroCasillas))+1;//posicion de donde estara
-            
+            int variable_aleatoria2 = aleatorio.nextInt((int)(numeroCasillas))+1;
             do {
                     variable_avanza = aleatorio.nextInt(20)+1;
-                    //condicion para que lo que avanza la escalera no sea mayor que el numero de casillas
                     if (( variable_aleatoria2 + variable_avanza ) >= (int) numeroCasillas){
                         variable_aleatoria2 = aleatorio.nextInt((int)(numeroCasillas))+1;
-                        continue;//sirve para saltarse una iteracion y volver al inicio del ciclo 
+                        continue;
                     }
-                    //condicion para que la poscion no sea 1
                     if (variable_aleatoria2 == 1){
                         variable_aleatoria2 = aleatorio.nextInt((int)(numeroCasillas))+1;
-                        continue;//sirve para saltarse una iteracion y volver al inicio del ciclo 
+                        continue;
                     }
-                    //condicion para que la posicion final no sea en la casilla finals
                     if((variable_aleatoria2)== (int)numeroCasillas){
                         variable_aleatoria2 = aleatorio.nextInt((int)numeroCasillas)+1;
-                        continue;//sirve para saltarse una iteracion y volver al inicio del ciclo 
+                        continue;
                     }
-                    //condicion para que lo que avanza no este en la misa fila
                     if (variable_avanza <= Math.sqrt((int)numeroCasillas)){
-                        continue;//sirve para saltarse una iteracion y volver al inicio del ciclo 
+                        continue;
                     }
-                    break;//se sale del ciclo
+                    break;
             } while ( true ) ;
             casilla1[variable_aleatoria2].setTipoCasilla("Escalera");
             casilla1[variable_aleatoria2].setMovimientoN(variable_avanza);
            
              
-        }//cierra for de escalera
+        }
         
-        //se hacen cinco casillas aleatorias de serpeinte
+        //serpiente
         for (int l = 1;l<=5;l++){
-            
-            int variable_aleatoria3 = aleatorio.nextInt((int)(numeroCasillas))+1;//posicion de donde estara
-               
-            
-            do{
-                
-                variable_avanza = aleatorio.nextInt(20)+1;//variable del movimiento N
-                variable_avanza= -variable_avanza;//el movimiento tiene que ser negativo
-                if ((variable_avanza+variable_aleatoria3)<=1){//programación defensiva en caso que la suma sea menor que 1
-                    variable_aleatoria3 = aleatorio.nextInt((int)(numeroCasillas))+1;//se crea otra variable de posicion
-                    continue;//se salta una iteración
+            int variable_aleatoria3 = aleatorio.nextInt((int)(numeroCasillas))+1;
+            do{ 
+                variable_avanza = aleatorio.nextInt(20)+1;
+                variable_avanza= -variable_avanza;
+                if ((variable_avanza+variable_aleatoria3)<=1){
+                    variable_aleatoria3 = aleatorio.nextInt((int)(numeroCasillas))+1;
+                    continue;
                 }    
-                if (casilla1[variable_avanza+variable_aleatoria3].getTipoCasilla().equals("Escalera")){//programacion defensiva para que una serpieente no termine donde empieza una escalera
-                    variable_aleatoria3 = aleatorio.nextInt((int)(numeroCasillas))+1;//se crea otra variable de posicion
-                    continue;//sirve para saltarse una iteracion y volver al inicio del ciclo 
+                if (casilla1[variable_avanza+variable_aleatoria3].getTipoCasilla().equals("Escalera")){
+                    variable_aleatoria3 = aleatorio.nextInt((int)(numeroCasillas))+1;
+                    continue;
                 }
-                //condicionpara que lo que avanza no sea mayor que el numero de filas
+
                 if (-variable_avanza <= Math.sqrt((int)numeroCasillas))
-                    continue;//sirve para saltarse una iteracion y volver al inicio del ciclo 
+                    continue;
                
                 if (variable_aleatoria3 == (int)numeroCasillas){
                     variable_aleatoria3 = aleatorio.nextInt((int)numeroCasillas)+1;
-                    continue;//sirve para saltarse una iteracion y volver al inicio del ciclo 
+                    continue;
                 }
-                    
-                
+
                 break;//se sale del ciclo
             }
             while(true);
-            //después de pasar por las correciones, se agregan los valores vállidos
+
             casilla1[variable_aleatoria3].setTipoCasilla("Serpiente");
             casilla1[variable_aleatoria3].setMovimientoN(variable_avanza);
            
-        }//cierra for de serpiente
+        }
        
-        //se hacen cinco casillas aleatorias de avanza N
+        //escalera tipo2
         for (int m = 1;m<=5;m++){
-            int variable_aleatoria4 = aleatorio.nextInt((int)(numeroCasillas))+1;//variable de posicion
-                       
+            int variable_aleatoria4 = aleatorio.nextInt((int)(numeroCasillas))+1;            
             do{
-                variable_avanza = aleatorio.nextInt(5)+1;//variable del atributo avanza
-                //mientras la posicion mas lo que avanza sea mayor que el numero de casillas se cambia de posicion
+                variable_avanza = aleatorio.nextInt(5)+1;
                 if ((variable_avanza+variable_aleatoria4) >(int)(numeroCasillas)){
                     variable_aleatoria4 = aleatorio.nextInt((int)(numeroCasillas))+1;
-                    continue;//se salta una iteracion
+                    continue;
                 }
-                //codicion para que no pueda haber que no termine un avanza N donde esta una serpiente
-                 if (casilla1[variable_avanza+variable_aleatoria4].getTipoCasilla().equals("Serpiente")){//no puede empezar donde hay una serpiente
+                
+                 if (casilla1[variable_avanza+variable_aleatoria4].getTipoCasilla().equals("Serpiente")){
                      variable_aleatoria4 = aleatorio.nextInt((int)(numeroCasillas))+1;
-                    continue;//se salta una iteracion
+                    continue;
                 }
-                //si la posicio del avanza es la primera se cambia la posicion
+
                 if (variable_aleatoria4==1){
                     variable_aleatoria4 = aleatorio.nextInt((int)(numeroCasillas))+1;
                     continue;
                 } 
                 break; 
                 
-            }while(true);//cierra avanza N
+            }while(true);
                 casilla1[variable_aleatoria4].setTipoCasilla("Avanza");
                 casilla1[variable_aleatoria4].setMovimientoN(variable_avanza);
             
-        }//cierra for
+        }
         
         
-        //------CREACIÓN TABLERO GRAFICO
+        //tablero
         {   
-        
         JFrame frame = new JFrame();
-        //dependiendo de la dificultad elegida por el usuario, dependera el tablero a instanciar
         if (presentacion.getNivelDificultad().equals("Nivel avanzado")){
             TableroAvanzado tablero1 = new TableroAvanzado((int)(numeroCasillas), jugador, casilla1, (int) numeroJugadores);
             frame.getContentPane().add(tablero1, BorderLayout.CENTER);
@@ -212,16 +199,22 @@ public class Juego {
         }
         Titulo titulo1 = new Titulo();    
         frame.setTitle("Tablero");
-        frame.getContentPane().add(titulo1, BorderLayout.EAST); //sout
+        frame.getContentPane().add(titulo1, BorderLayout.EAST); 
         frame.setSize( Toolkit.getDefaultToolkit().getScreenSize().width,Toolkit.getDefaultToolkit().getScreenSize().height); 
-        //Evitar que se pueda cambiar el tamanio de la ventana
 	frame.setResizable(false);
         frame.setDefaultCloseOperation (JFrame.EXIT_ON_CLOSE);
-	//Mostrar la ventana
 	frame.setVisible(true);
         
-        }//cierra frame       
-    }//cierra main
-}//cierra clase
+        }      
+        
+        
+        
+        
+        
+        
+        
+        
+    }
+}
 
 
