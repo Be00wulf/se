@@ -16,6 +16,7 @@ public class Titulo extends JPanel {
         addWidgets();
     }
     
+    
     //metodos
     private void addWidgets(){
         B_titulo = BorderFactory.createRaisedBevelBorder();
@@ -39,5 +40,8 @@ public class Titulo extends JPanel {
     }
     
     //get set
+    
+    
+    
     
 }
