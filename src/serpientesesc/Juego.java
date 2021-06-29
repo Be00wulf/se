@@ -82,21 +82,19 @@ public class Juego {
             casilla1[variable_aleatoria].setTipoCasilla("Tira de Nuevo");
         }
         
-        for (int i =1;i<=5;i++)
-        {
-            int variable_aleatoria=aleatorio.nextInt((int)numeroCasillas)+1;
-            while(true)//ciclo para validar la posicion de las casillas
-            {   //no puede haber una casilla especial en la primera ni en la ultima
-                if(variable_aleatoria==1||variable_aleatoria==(int)numeroCasillas)
-                {
-                    variable_aleatoria = aleatorio.nextInt((int)(numeroCasillas))+1;// se vuelve a cambiar de posicion
-                    continue;
+            for (int i =1;i<=5;i++){
+                int variable_aleatoria=aleatorio.nextInt((int)numeroCasillas)+1;
+                while(true)
+                {   
+                    if(variable_aleatoria==1||variable_aleatoria==(int)numeroCasillas)
+                    {
+                        variable_aleatoria = aleatorio.nextInt((int)(numeroCasillas))+1;
+                        continue;
+                    }
+                    break;
                 }
-                break;//si no pasa la condicion, se termina el ciclo while
+                casilla1[variable_aleatoria].setTipoCasilla("Cambia Tablero");     
             }
-            casilla1[variable_aleatoria].setTipoCasilla("Cambia Tablero");//se hacen las casillas de cambia tablero
-                
-        }
         }
         
         //se hacen cinco casillas aleatorias de escalera
