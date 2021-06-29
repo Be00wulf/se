@@ -50,4 +50,8 @@ public class Jugador {
         this.turnoPerdido = turnoPerdido;
     }
     
+    
+    
+    
+    
 }
