@@ -12,6 +12,7 @@ public class TableroAvanzado extends Tablero{
        super(numeroCasillas, jugador, casilla, numerojugadores);
     }
 
+    
     //meto2
     @Override
     public void parteLogicaJuego(){
@@ -155,7 +156,6 @@ public class TableroAvanzado extends Tablero{
                         casilla[variable_aleatoria2].setTipoCasilla("Escalera");
                         casilla[variable_aleatoria2].setMovimientoN(variable_avanza);
 
-
                     }
 
                     for (int l = 1;l<=5;l++){
@@ -219,7 +219,6 @@ public class TableroAvanzado extends Tablero{
                     
                     
             }        
-            
                 break;
             }  
       
@@ -237,6 +236,7 @@ public class TableroAvanzado extends Tablero{
             }
     }
     
+    
     //turnos
     public void controlDeTurnosAvanzado(){
         if ((dador1==6&&dador2==6)||(casilla[jugador[jugadorActual].getCasillaActual()].getTipoCasilla().equals("Tira de Nuevo"))){
@@ -246,7 +246,8 @@ public class TableroAvanzado extends Tablero{
             controlDeTurnos();
         }
     }
-
+  
+    
     @Override
     public void actionPerformed(ActionEvent evento){
         String accion = evento.getActionCommand();
