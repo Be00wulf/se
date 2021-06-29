@@ -150,7 +150,7 @@ public class Juego {
                     continue;
                 }
 
-                break;//se sale del ciclo
+                break;
             }
             while(true);
 

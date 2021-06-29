@@ -73,15 +73,15 @@ public class Presentacion{
                
         numeroJugadores = JOptionPane.showInputDialog(null, "SELECCIONE LA CANTIDAD DE JUGADORES",   
                 "Jugadores",   JOptionPane.QUESTION_MESSAGE,null,  
-        new Object[] { "1", 2, 3,4,5,6 },   "");
+        new Object[] { " ", 2, 3},   2);
         while(numeroJugadores == null){
             JOptionPane.showMessageDialog(null,"Por favor escoja un numero de jugadores");
             numeroJugadores = JOptionPane.showInputDialog(null, "Seleccione el n\u00famero de jugadores",   
                     "Jugadores",   JOptionPane.QUESTION_MESSAGE,null,  
-            new Object[] { "contra computadora", 2, 3,4 },   "");
+            new Object[] { " ", 2, 3},   2);
         }
 
-        if (numeroJugadores.equals("1")){
+        if (numeroJugadores.equals(" ")){
             numeroJugadores = 1;
         }
     }
