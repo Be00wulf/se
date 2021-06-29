@@ -11,102 +11,78 @@ import javax.swing.JFrame;
 public class Juego {
     
     public static void main(String[] args){
-       
-        //---------PRESENTACION PREVIO AL JUEGO 
-        Presentacion presentacion = new Presentacion();
+        Presentacion presentacion = new Presentacion();                 //no game no life
         System.out.println(presentacion.getNivelDificultad());
-        
-        
-        
-        //  ------------ INGRESO DATOS GENERALES
-            //el usuario decide cuantas casillas quiere en su tablero
         presentacion.pedirDatosUsuario();
         Object numeroCasillas = presentacion.getNumeroCasillas();
         Object numeroJugadores = presentacion.getNumeroJugadores();
-              
-            
-       
-         //-------------------CREACIÓN DE ESTRUCTURAS Y TABLERO LÓGICO
-        
-        Jugador []jugador;//se referencia un arreglo de los jugadores
+        Jugador []jugador;
  
-        if ((int)numeroJugadores ==1)//si es contra la computadora se inicializa con tres para  no usar la posicion 0
-           jugador = new Jugador[3];//esta condicion sirve para crear tres posiciones en caso que sean dos jugadores
+        if ((int)numeroJugadores ==1)
+           jugador = new Jugador[3];
         else
-          jugador = new Jugador[(int)numeroJugadores+1];//si no es 1 jugador, se inicializan los jugadores con jugadores +1
+          jugador = new Jugador[(int)numeroJugadores+1];
 
-        //ciclo para pedir datos de nombres y color de ficha
         for(int cont = 1;cont<=(int)numeroJugadores;cont++){
-
             String nombre = JOptionPane.showInputDialog(null, "NOMBRE");
             String apellido = JOptionPane.showInputDialog(null, "APELLIDO");
             String id = JOptionPane.showInputDialog(null, "ID");
             while(nombre == null)
                 nombre =JOptionPane.showInputDialog(null, "Ingrese el nombre del jugador porfavor");
             
-            Color colorFicha = JColorChooser.showDialog(null,"Select a Color", Color.RED);//seleccionador de color de ficha
+            Color colorFicha = JColorChooser.showDialog(null,"Select a Color", Color.RED);
             while (colorFicha == null)
                 colorFicha = JColorChooser.showDialog(null,"Select a Color", Color.RED);
             
-            jugador[cont] = new Jugador();//se instancia cada objeto
-            jugador[cont].setNombre(nombre);//se le dan los atributos
-            jugador[cont].setColorFicha(colorFicha);//se le setea el atribuuto
-            
+            jugador[cont] = new Jugador();
+            jugador[cont].setNombre(nombre);
+            jugador[cont].setColorFicha(colorFicha);  
         }
-        //si es un jugador, es porque la computadora es el otro jugador
+
          if ((int)numeroJugadores ==1){
-             numeroJugadores=2;//para que el juego funcione se le tiene que decir que van haber dos jugadores y solo se ingresa 1 por el usuario
+             numeroJugadores=2;
              jugador[2] = new Jugador();
              jugador[2].setNombre("Computadora");
              jugador[2].setColorFicha(Color.BLACK);          
-        }//cierra condicion       
+        }   
         
-        //------------------------CREACION DE CASILLAS
-        Casilla [] casilla1;//arreglo de clase casilla
-        casilla1 = new Casilla[(int)numeroCasillas+1];//se inicializa con el número de casillas +1
+        Casilla [] casilla1;
+        casilla1 = new Casilla[(int)numeroCasillas+1];
       
-        //primero se agrega que todas las casillas son de tipo simple
         for (int cont = 1; cont<=(int)numeroCasillas;cont++){
             casilla1[cont] = new Casilla();
-            casilla1[cont].setTipoCasilla("Simple");
-            
-            
-            
+            casilla1[cont].setTipoCasilla("Simple"); 
         }
-        
-        // se hacen 5 casillas aleatorias de PIERDE TURNO 
-        //en el tablero se agregan las casillas
+
         Random aleatorio = new Random();
         for (int h = 1; h<=5;h++){
-            int variable_aleatoria = aleatorio.nextInt((int)(numeroCasillas))+1;//variable de posicion
+            int variable_aleatoria = aleatorio.nextInt((int)(numeroCasillas))+1;
             while(true){
-                if (variable_aleatoria == 1|| variable_aleatoria ==(int)numeroCasillas){//no puede haber una casilla en la primera o última casilla
-                    variable_aleatoria = aleatorio.nextInt((int)(numeroCasillas))+1;//se vuelve a cambiar de posicion
-                    continue;//sirve para saltarse una iteracion y volver al inicio del ciclo 
-                }
-                break;//se sale del ciclo
-            }
-            casilla1[variable_aleatoria].setTipoCasilla("Pierde Turno");
-       }//cierra ciclo for
-        
-        if (presentacion.getNivelDificultad().equals("Nivel avanzado")){
-        //se crean las 5 casillas de TIRAR DE NUEVO
-        
-        for (int a=1;a<=5;a++){
-            int variable_aleatoria = aleatorio.nextInt((int)numeroCasillas)+1;//aleatorio de la posicion
-            while(true)//ciclo para validar la posicion de las casillas
-            {   //no puede haber una casilla especial en la primera ni en la ultima
-                if(variable_aleatoria==1||variable_aleatoria==(int)numeroCasillas)
-                {
-                    variable_aleatoria = aleatorio.nextInt((int)(numeroCasillas))+1;// se vuelve a cambiar de posicion
+                if (variable_aleatoria == 1|| variable_aleatoria ==(int)numeroCasillas){
+                    variable_aleatoria = aleatorio.nextInt((int)(numeroCasillas))+1;
                     continue;
                 }
-                break;//si no pasa la condicion, se termina el ciclo while
+                break;
             }
-            casilla1[variable_aleatoria].setTipoCasilla("Tira de Nuevo");//ahora si ya se pone la casilla en su lugar
+            casilla1[variable_aleatoria].setTipoCasilla("Pierde Turno");
+       }
+        
+        if (presentacion.getNivelDificultad().equals("Nivel avanzado")){
+        for (int a=1;a<=5;a++){
+            int variable_aleatoria = aleatorio.nextInt((int)numeroCasillas)+1;
+            while(true)
+            {   
+                if(variable_aleatoria==1||variable_aleatoria==(int)numeroCasillas)
+                {
+                    variable_aleatoria = aleatorio.nextInt((int)(numeroCasillas))+1;
+                    continue;
+                }
+                break;
+            }
+            casilla1[variable_aleatoria].setTipoCasilla("Tira de Nuevo");
         }
-        //creacion de CASILLAS CAMBIA TABLERO
-        for (int i =1;i<=5;i++)
+        
+        for (int i =1;i<=6;i++)//5
         {
             int variable_aleatoria=aleatorio.nextInt((int)numeroCasillas)+1;
             while(true)//ciclo para validar la posicion de las casillas
